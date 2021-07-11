@@ -22,18 +22,15 @@ x-price-adapter-def: &price-adapter-def
 services:
   chain:
     container_name: chain
-    image: paritytech/ci-linux:production
+    image: ubinix5warun/chainlink-polkadot:latest
     working_dir: /var/www/node-template
     ports:
       - "9944:9944"
     environment:
       - CARGO_HOME=/var/www/node-template/.cargo
     volumes:
-      - ../substrate-node-example/:/var/www/node-template
-      - ../pallet-chainlink/:/var/www/pallet-chainlink
-      - ../pallet-chainlink-feed/:/var/www/pallet-chainlink-feed
       - "chain:/root/.local"
-    command: bash -c "cargo build --release && ./target/release/node-template --dev --ws-external"
+    command: bash -c "/node-template --dev --ws-external"
     networks:
       - fm-substrate
 
